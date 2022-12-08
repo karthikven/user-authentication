@@ -1,16 +1,17 @@
 import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import axios from './api/axios'
+import axios from './../../api/axios'
+import './Register.css'
 
 // font-awesome icons
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const USER_REGEX = /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%_]).{8,24}$/
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%*_]).{8,24}$/
 const FULLNAME_REGEX = /^[a-zA-Z ]*$/
-const DESIGNATION_REGEX = /^[a-zA-Z0-9 ]*$/
-const REGISTER_URL = "/registration"
+
+const REGISTER_URL = "/register"
 
 const Register = () => {
 	const userRef = useRef()
@@ -20,10 +21,6 @@ const Register = () => {
 	const [fullName, setFullName] = useState('')
 	const [validFullName, setValidFullName] = useState(false)
 	const [fullNameFocus, setFullNameFocus] = useState(false)
-
-	const [designation, setDesignation] = useState('')
-	const [validDesignation, setValidDesignation] = useState(false)
-	const [designationFocus, setDesignationFocus] = useState(false)
 
 	const [user, setUser] = useState('')
 	const [validName, setValidName] = useState(false)
@@ -49,11 +46,7 @@ const Register = () => {
     	setValidFullName(result)
     }, [fullName])
 
-    useEffect(()=> {
-    	const result = DESIGNATION_REGEX.test(designation)
-    	setValidDesignation(result)
-    }, [designation])
-
+    
     useEffect(() => {
     	const result = USER_REGEX.test(user)
     	setValidName(result)
@@ -79,10 +72,10 @@ const Register = () => {
 
     	try {
     		const response = await axios.post(REGISTER_URL, 
-    			{'user_full_name': fullName, 'user_role': designation, 'user_email': user, 'user_password': pwd}    			
+    			{'user_full_name': fullName, 'user_email': user, 'user_password': pwd}    			
     		)
-
     		console.log(response.data)
+    		console.log('checkpoint 1')
     		setSuccess(true)
     	// clear input fields
     	} catch (err) {
@@ -92,6 +85,7 @@ const Register = () => {
     		} else if (err.response?.status === 409) {
     			setErrMsg("Email already registered")
     		} else {
+    			console.log('checkpoint 2')
     			setErrMsg('Registration Failed')
     		}
     		errRef.current.focus()
@@ -110,11 +104,11 @@ const Register = () => {
 			</section>
 			) : (
 
-		<section>
+		<section className="register-container">
 			<p
 			ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"
 			>{errMsg}</p>
-			<h1>Sign Up</h1>
+			<h1>Become a Superbuilder today</h1>
 
 
 			<form onSubmit={handleSubmit}>
@@ -135,23 +129,6 @@ const Register = () => {
 					onChange={ (e) => setFullName(e.target.value) }
 					onFocus = { () => setFullNameFocus(true) }
 					onBlur = { () => setFullNameFocus(false) }
-				/>
-
-				{/* Role */}
-
-				<label>
-					Role in Company:
-					{/* if empty, display a cross, else check*/}
-					<FontAwesomeIcon icon={faCheck} className={validDesignation && designation ? "valid" : "hide"} />
-					<FontAwesomeIcon icon={faTimes} className={!designation || validDesignation ? "hide" : "invalid"} />
-				</label>
-				<input 
-					type="text"
-					id="designation"
-					required
-					onChange={ (e) => setDesignation(e.target.value) }
-					onFocus = { () => setDesignationFocus(true) }
-					onBlur = { () =>setDesignationFocus(false) }
 				/>
 
 				{/* email  */}
@@ -247,10 +224,10 @@ const Register = () => {
 
 				{/* already signed up? line */}
 				<p>
-					Already Registed? <br />
+					Have an account already? <br />
 					<span className="line">
-						{/* <Link to="/"> </Link> */}
-						<a href="/">Sign In</a>
+						<Link to="/login">Sign In</Link>
+						
 					</span>
 				</p>
 			</form>

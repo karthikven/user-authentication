@@ -1,0 +1,59 @@
+.logo {
+	color: #FF7E30;
+/*	color: #ae8868;*/
+	
+	margin: 1%;
+	font-size: 28px;
+	max-width: 10%;
+}
+
+.tagline {
+	font-size: 12px;
+	align-items: center;
+	text-align: center;
+
+}
+
+.project-list-container {
+	height: 100%;
+	width: 80%;
+	margin-top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.project-list-container h1 {
+	background-color: #131313;
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.project-list {
+	display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    padding-top: 5%;
+}
+
+.project-tile {
+	text-align: center;
+	transition: all .2s ease-in-out; 
+}
+
+.project-tile:hover {
+	transform: scale(1.1); 
+	cursor: pointer;
+}
+
+.project-tile img {
+    width: 150px;
+    height: 150px;
+}
+
+.project-name {
+	font-size: 16px;
+    margin-top: 10px;
+    color: #fff;
+}
