@@ -3,6 +3,7 @@ import Layout from './pages/Layout'
 import Register from './pages/register/Register'
 import Login from './pages/login/Login'
 import Projects from './pages/projects/Projects'
+import AllTasks from './pages/tasks/AllTasks'
 
 function App() {
   
@@ -13,6 +14,8 @@ function App() {
         <Route path="/register" element={<Register />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/users/:id/projects" element={<Projects />}/>
+        {/* <Route path="/projects/:projectId/users/:userId/tasks" element={<AllTasks />}/> */}
+        <Route path="/users/:userId/projects/:projectId/tasks" element={<AllTasks />}/>
       </Route>
     </Routes>
       

@@ -1,0 +1,135 @@
+.logo {
+/*	color: #FF7E30;*/
+	color: #fff;
+	margin: 0;
+	font-size: 32px;
+	padding-top: 5%;
+/*	max-width: 10%;*/
+}
+.tagline {
+	font-size: 12px;
+/*	white-space: nowrap;*/
+	text-align: right;
+	width: 100%;
+}
+
+
+
+.sidebar {
+	background: #131313;
+  	box-sizing: border-box;
+/*  	max-width: 800px;*/
+	grid-column: 1/2;
+	height: 750px;
+/*  	grid-row: 1 / 4;*/
+
+}
+
+.sidebar-content {
+	margin: auto;
+	margin-left: 5%;
+}
+
+.sidebar-content a {
+	text-decoration: none;
+}
+
+/* live project */
+
+.sidebar-live-project {
+/*	width: 220px;*/
+	margin: 1%;
+	margin-top: 15%;
+	margin-bottom: 5%;
+}
+
+.sidebar-sub-header {
+/*	margin: 18px 0 8px 10%;*/
+
+	font-size: 12px;
+	font-weight: 500;
+	color: #d3d2d3;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-bottom: 5%;
+}
+
+.sidebar-project-name {
+  
+  border-radius: 15px;
+
+/*  margin-left: -8%;*/
+}
+
+.sidebar-project-name:hover {
+/*  background-color: #107DCB;*/
+}
+
+.sidebar-project-name ul{
+  list-style: none;
+/*  margin: 5px 5px 8px -3.5%; */
+  display: flex;
+/*  margin: 0 auto;*/
+  align-items: center;
+
+
+}
+
+.sidebar-project-name a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  align-items: center;
+  vertical-align: middle;
+
+}
+
+.sidebar-project-name img {
+  vertical-align: middle;
+  border-radius: 20px;
+}
+
+
+
+/* Navbar links */
+
+.sideitem {
+	margin-top: 5%;
+	margin-bottom: 15%;
+	color: #fff;
+	padding: 5%;
+	margin-left: 1%;
+	margin-right: 2%;
+
+}
+
+.sideitem:hover {
+	background-color: #6e6e80;
+	border-radius: 10px;
+}
+
+/* create a new task button */
+
+.link-to-create-new-task {
+	margin-right: 2%;
+
+}
+
+.link-to-create-new-task button {
+	background-color: #131313;
+	border: solid #353740;
+	color: #fff;
+	width: 100%;
+	text-align: left;
+
+
+}
+
+.link-to-create-new-task a {
+	color: #fff;
+	font-size: 16px;
+}
+
+.link-to-create-new-task button:hover {
+	background-color: #6e6e80;
+}
