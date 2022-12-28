@@ -1,0 +1,37 @@
+.completed-button {
+  /* Add some basic styling to the button */
+  display: inline-block;
+  padding: 0.5em 1em;
+  border: none;
+  color: white;
+/*  background: #333;*/
+  background-color: #2a2c37;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 200px;
+  border-radius: 10px;
+  /* Add some hover effect */
+  transition: background 0.2s;
+  &:hover {
+    background: #555;
+  }
+}
+
+.completed-button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Style the completed count */
+  .completed-count {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    border-radius: 50%;
+    background: green;
+    color: white;
+    font-size: 0.8em;
+    text-align: center;
+    margin-right: 0.5em;
+  }

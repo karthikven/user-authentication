@@ -4,6 +4,7 @@ import Register from './pages/register/Register'
 import Login from './pages/login/Login'
 import Projects from './pages/projects/Projects'
 import AllTasks from './pages/tasks/AllTasks'
+import CreateTask from './pages/create-task/CreateTask'
 
 function App() {
   
@@ -16,6 +17,7 @@ function App() {
         <Route path="/users/:id/projects" element={<Projects />}/>
         {/* <Route path="/projects/:projectId/users/:userId/tasks" element={<AllTasks />}/> */}
         <Route path="/users/:userId/projects/:projectId/tasks" element={<AllTasks />}/>
+        <Route path="/users/:userId/projects/:projectId/createtask" element={<CreateTask />}/>
       </Route>
     </Routes>
       

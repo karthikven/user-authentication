@@ -14,7 +14,7 @@ import plus from './../../img/plus.png'
 
 const Sidebar = (props) => {
 
-	const { avatar, project_name } = props
+	const { avatar, project_name, userId, projectId } = props
 
 	return (
 		<div className="sidebar">
@@ -24,7 +24,8 @@ const Sidebar = (props) => {
 				
 				<div className="link-to-create-new-task">
               		<button>
-            			<Link to="/">
+            			<Link to={`/users/${userId}/projects/${projectId}/createtask`}>
+            				{/* /users/:userId/projects/:projectId/createtask */}
               				<FontAwesomeIcon icon={faPlus} /><span>&nbsp;&nbsp;Create New Task</span>
             			</Link>
           			</button>

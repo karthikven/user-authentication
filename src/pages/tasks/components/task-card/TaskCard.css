@@ -1,0 +1,53 @@
+.task-card {
+	padding: 10px 16px;
+  	margin: 20px 0;
+  	border-bottom: 0.25px solid;
+  	border-top: 0.25px solid;
+  	border-left: 0.25px solid;
+  	border-right: 0.25px solid;
+  	background-color: #fff;
+  	border-radius: 5px;
+  	border-color: #4682B4;
+  	width: 300px;
+  	font-size: 15px;
+  	color: #131313;
+  	position: relative;
+  	border-radius: 15px;
+  	height: 150px;
+}
+
+.task-card a {
+	text-decoration: none;
+}
+
+.task-card-row1 {
+	color: #131313;
+	display: flex;	
+	justify-content: space-between;
+	margin-top: 3%;
+	margin-bottom: 3%;
+	align-items: center;
+}
+
+.task-card-row1 
+.task-card-users {
+	display: flex;
+}
+
+.task-card-row2 {
+	color: #131313;
+	display: flex;	
+	justify-content: space-between;
+	margin-top: 3%;
+	margin-bottom: 3%;
+	align-items: center;
+}
+
+.task-card-row3 {
+	color: #131313;
+	display: flex;	
+	justify-content: space-between;
+	margin-top: 3%;
+	margin-bottom: 3%;
+	align-items: center;
+}
