@@ -1,13 +1,20 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { useLocalStorage } from "./../../../../hooks/useLocalStorage";
 import './LocationAndDesign.css'
+
 
 const LocationAndDesign = () => {
 	
-	const [locationBlock, setLocationBlock] = useState('')
-	const [locationFloor, setLocationFloor] = useState('')
-	const [locationUnit, setLocationUnit] = useState('')
-	const [locationRoom, setLocationRoom] = useState('')
-	const [floorPlan, setFloorPlan] = useState('')
+	const fileInputRef = useRef(null);
+	const [locationBlock, setLocationBlock] = useLocalStorage("locationBlock", '')
+	const [locationFloor, setLocationFloor] = useLocalStorage("locationFloor", '')
+	const [locationUnit, setLocationUnit] = useLocalStorage("locationUnit", '')
+	const [locationRoom, setLocationRoom] = useLocalStorage("locationRoom", '')
+	
+	const handleSubmit = (event) => {
+		event.preventDefault()
+		fileInputRef.current.files.map((file) => console.log(file))
+	}
 
 
 	return (
@@ -49,8 +56,9 @@ const LocationAndDesign = () => {
 				className="create-card-drawings-upload"
 				type="file"
 				id="create-card-upload-design"
-				value={floorPlan}
-				onChange={(e) => setFloorPlan(e.target.files[0])}
+				// value={floorPlan}
+				multiple
+				onSubmit={() => handleSubmit()}
 			/>
 			
 		</div>

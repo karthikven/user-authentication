@@ -43,7 +43,7 @@
 .create-card-progressbar {
   width: 400px;
   height: 20px;
-  margin-bottom: 50px;
+/*  margin-bottom: 20px;*/
   padding: 0.5%;
   margin: 1%;
   background-color: #131313;
@@ -63,7 +63,7 @@
 .create-card-header {
   color: #B35D27;
   text-align: center;
-  margin-top: 2%;
+/*  margin-top: 1%;*/
 }
 
 .create-card-form-container {

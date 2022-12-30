@@ -19,7 +19,7 @@ const AllTasks = (props) => {
 
 	const {data: tasks, loading, error } = useFetch(TASKS_URL)
 
-	{tasks && console.log(tasks)}
+	{tasks && console.log("tasks:   ", tasks)}
 
 
 

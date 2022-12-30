@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
+import { useParams } from 'react-router-dom';
 import Select from 'react-select'
 import './TaskAttributes.css'
+import { useLocalStorage } from "./../../../../hooks/useLocalStorage";
+import useFetch from './../../../../hooks/useFetch'
 
-const TaskAttributes = () => {
+const TaskAttributes = (props) => {
 
 	// fields in this page: task name, category, workflow, planned start date, deadline, priority, measurements
 	const category_list = ["Civil", "Electrical", "Plumbing", "Carpentry", 
@@ -29,19 +32,46 @@ const TaskAttributes = () => {
 								}
 
 
-	const [taskName, setTaskName] = useState('')
-	const [category, setCategory] = useState('Civil')
-	const [workflow, setWorkflow] = useState('')
-	const [plannedStartDate, setPlannedStartDate] = useState(' ')
-	const [deadline, setDeadline] = useState('')
-	const [measurementsValue, setMeasurementsValue] = useState('')
-	const [measurementsUnits, setMeasurementsUnits] = useState('')
-	const [fetchUsersError, setFetchUsersError] = useState(null)
-	const [taskAssignedTo, setTaskAssignedTo] = useState(null)
+	const [taskName, setTaskName] = useLocalStorage("taskName", '')
+	const [category, setCategory] = useLocalStorage("category", 'Civil')
+	const [workflow, setWorkflow] = useLocalStorage("workflow", '')
+	const [plannedStartDate, setPlannedStartDate] = useLocalStorage("plannedStartDate", '')
+	const [deadline, setDeadline] = useLocalStorage("deadline", '')
+	const [measurementsValue, setMeasurementsValue] = useLocalStorage("measurementsValue", '')
+	const [measurementsUnits, setMeasurementsUnits] = useLocalStorage("measurementsUnits", '')
+	// const [fetchUsersError, setFetchUsersError] = useState(null)
+	const [taskAssignedTo, setTaskAssignedTo] = useLocalStorage("taskAssignedTo", [])
+	const [taskSupervisors, setTaskSupervisors] = useLocalStorage("taskSupervisors", [])
+
 	const [dropdownUsersList, setDropdownUsersList] = useState(null)
+	
+
+	const routeParams = useParams()
+	const projectId = routeParams.projectId
+	const userId = routeParams.userId
 
 	const cat_list = category_list.map(cat => ({value: cat, label: cat}))
 	const wf_list = category_workflow_map[category].map(wf => ({value: wf, label: wf}))
+
+	const { usersInProj } = props
+
+	console.log("usersInProj FLAGGGG: ", usersInProj)
+
+	
+
+	useEffect(() => {
+		if (usersInProj) {
+			const usersList = usersInProj.map(user => ({value: user.user_id, label: user.user_full_name, image: user.user_avatar}))
+			setDropdownUsersList(usersList)
+		}
+
+	}, [usersInProj])
+
+	// ref for dropdown's menuportal target
+	const menuContainerRef = useRef(null);
+	useEffect(() => {
+    	menuContainerRef.current = document.getElementById('dropdown-menu-container');
+  	}, []);
 
 	return (
 		<div className="create-card-task-attributes">
@@ -55,10 +85,10 @@ const TaskAttributes = () => {
 			/>
 
 			<label htmlFor="category">Category: </label>
-			<Select className="create-card-select" options={cat_list} onChange={(e) => setCategory(e['value'])}/>
+			<Select id="category" className="create-card-select" options={cat_list} onChange={(e) => setCategory(e['value'])}/>
 
 			<label htmlFor="workflow">Workflow: </label>
-			<Select className="create-card-select" options={wf_list} onChange={(e) => setWorkflow(e['value'])}/>
+			<Select id="workflow" className="create-card-select" options={wf_list} onChange={(e) => setWorkflow(e['value'])}/>
 
 			<label htmlFor="planned_start_date">Planned Start Date: </label>
 			<input
@@ -66,24 +96,54 @@ const TaskAttributes = () => {
 				type="date"
 				id="planned_start_date"
 				value={plannedStartDate}
-				onChange={(e) => setPlannedStartDate(e.target.value)}
+				onChange={(e) => console.log(e)}
 			/>
+
+			{/* setPlannedStartDate(e.target.value) */}
 
 			<label htmlFor="deadline">Deadline: </label>
 			<input
 				className="create-card-date-field"
 				type="date"
-				id="planned_start_date"
+				id="deadline"
 				value={deadline}
 				onChange={(e) => setDeadline(e.target.value)}
 			/>			
 
 			<label htmlFor="create-card-assignee-list">Assign task to: </label>
-			<Select className="create-card-select" options={dropdownUsersList} isMulti />
+			<Select 
+				className="create-card-select" 
+				id="create-card-assignee-list" 
+				options={dropdownUsersList} 
+				menuPortalTarget={menuContainerRef.current}
+				isMulti 
+				formatOptionLabel={ user => (
+					<div className="user-list-option">
+						<img src={user.image} height="40px" width="40px"/>&nbsp;<span>{user.label}</span>
+					</div>
+					)
+				}
+				onChange={(e) => setTaskAssignedTo(e.map(elem => elem.value))}
+				
+			/>
+			
 
-
-			<label htmlFor="create-card-assignee-list">Task Supervisors: </label>
-			<Select className="create-card-select" options={dropdownUsersList} isMulti />
+			<label htmlFor="create-card-supervisor-list">Task Supervisors: </label>
+			<Select 
+				className="create-card-select" 
+				id="create-card-supervisor-list"
+				options={dropdownUsersList} 
+				isMulti 
+				menuPortalTarget={menuContainerRef.current}
+				formatOptionLabel={ user => (
+					<div className="user-list-option">
+						<img src={user.image} height="40px" width="40px"/>&nbsp;<span>{user.label}</span>
+					</div>
+					)
+				}
+				onChange={(e) => setTaskSupervisors(e.map(elem => elem.value))}
+			/>
+			
 
 			<label htmlFor="measurement-value">Measurements - Value:</label>
 			<input className="create-card-number-field" type="number" value={measurementsValue} id="measurement-value" onChange={(e) => setMeasurementsValue(e.target.value)}></input>
@@ -91,6 +151,7 @@ const TaskAttributes = () => {
 			<label htmlFor="measurement-unit">Measurements - Units:</label>
 			<input type="text" value={measurementsUnits} id="measurement-unit" onChange={(e) => setMeasurementsUnits(e.target.value)}></input>
 
+			<div id="dropdown-menu-container"  />
 
 		</div>
 	)
