@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import TaskAttributes from './components/task-attributes/TaskAttributes'
 import LocationAndDesign from './components/location-and-design/LocationAndDesign'
 import LaborMaterial from './components/labor-material/LaborMaterial'
+import TaskMetrics from './components/task-metrics/TaskMetrics'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import useFetch from './../../hooks/useFetch'
@@ -12,7 +13,7 @@ import useFetch from './../../hooks/useFetch'
 const CreateTask = () => {
 	const [pageNumber, setPageNumber] = useState(0)
 	const [closeForm, setCloseForm] = useState(0)
-	const pageTitles = ["Define Basic Task Attributes", "Location & Drawings",  "Labor & Material"]
+	const pageTitles = ["Define Basic Task Attributes", "Location & Drawings",  "Labor & Material", "Task Metrics"]
 	
 	const navigate = useNavigate();
 	const { userId, projectId } = useParams();
@@ -28,7 +29,7 @@ const CreateTask = () => {
 	const {data: usersInProj, loading, error } = useFetch(USERS_IN_A_PROJ_URL)
 	{usersInProj && console.log("USER LIST:    ",usersInProj)}
 
-	const pageComponents = {0: <TaskAttributes usersInProj={usersInProj}/>, 1: <LocationAndDesign />, 2: <LaborMaterial />}
+	const pageComponents = {0: <TaskAttributes usersInProj={usersInProj}/>, 1: <LocationAndDesign />, 2: <LaborMaterial /> , 3: <TaskMetrics /> }
 	
 	return (
 
@@ -39,7 +40,7 @@ const CreateTask = () => {
 					<FontAwesomeIcon icon={faCircleXmark} onClick={() => handleCloseForm()} />	
 				</div>
 				<div className="create-card-progressbar">
-					<div className="create-card-progressbar-fill" style={{ width: pageNumber === 0 ? "33.33333%" : pageNumber == 1 ? "66.666666%" : "100%" }}></div>
+					<div className="create-card-progressbar-fill" style={{ width: pageNumber === 0 ? "25%" : pageNumber === 1 ? "50%" : pageNumber===2 ? "75%" : "100%" }}></div>
 				</div>
 				<div className="create-card-form-container">
 					<div className="create-card-header">
@@ -51,7 +52,6 @@ const CreateTask = () => {
 					<div className="create-card-footer">
 						<button onClick= {() => setPageNumber(pageNumber - 1)} disabled={pageNumber === 0}>Previous</button>
 						<button onClick = {() => {setPageNumber(pageNumber + 1)}} disabled={pageNumber === pageTitles.length - 1}>Next</button>
-						<button>Save</button>
 					</div>
 
 				</div>

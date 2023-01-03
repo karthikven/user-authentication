@@ -1,0 +1,16 @@
+.metrics-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.metrics-card h4 {
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.metrics-card p {
+  margin-bottom: 8px;
+}
