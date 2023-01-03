@@ -35,6 +35,7 @@ const TaskAttributes = (props) => {
 	const [taskName, setTaskName] = useLocalStorage("taskName", '')
 	const [category, setCategory] = useLocalStorage("category", 'Civil')
 	const [workflow, setWorkflow] = useLocalStorage("workflow", '')
+	const [reworkFlag, setReworkFlag] = useLocalStorage("reworkFlag", false)
 	const [plannedStartDate, setPlannedStartDate] = useLocalStorage("plannedStartDate", '')
 	const [deadline, setDeadline] = useLocalStorage("deadline", '')
 	const [measurementsValue, setMeasurementsValue] = useLocalStorage("measurementsValue", '')
@@ -90,13 +91,39 @@ const TaskAttributes = (props) => {
 			<label htmlFor="workflow">Workflow: </label>
 			<Select id="workflow" className="create-card-select" options={wf_list} onChange={(e) => setWorkflow(e['value'])}/>
 
+			<label htmlFor="rework">Is this Rework done for a previous task?</label>
+			<div className="rework-radio-buttons">
+				<input
+				  	type="radio"
+				  	id="rework-yes"
+				  	name="rework"
+				  	value="yes"
+				  	checked={reworkFlag === true}
+				  	onChange={() => setReworkFlag(true)}
+				/>
+				<label htmlFor="rework-yes">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input
+				  	type="radio"
+				  	id="rework-no"
+				  	name="rework"
+				  	value="no"
+				  	checked={reworkFlag === false}
+					onChange={() => setReworkFlag(false)}
+				/>
+				<label htmlFor="rework-no">No</label>
+			</div>
+
+			{ reworkFlag===true && (<label htmlFor="rework-task">Tag Task being Reworked on: </label>) }
+			{ reworkFlag===true && (<Select id="rework-task" className="create-card-select" options={wf_list} onChange={(e) => setWorkflow(e['value'])}/>) }
+			
+			
 			<label htmlFor="planned_start_date">Planned Start Date: </label>
 			<input
 				className="create-card-date-field"
 				type="date"
 				id="planned_start_date"
 				value={plannedStartDate}
-				onChange={(e) => console.log(e)}
+				onChange={(e) => setPlannedStartDate(e.target.value)}
 			/>
 
 			{/* setPlannedStartDate(e.target.value) */}

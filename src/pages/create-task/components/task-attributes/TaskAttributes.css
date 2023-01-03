@@ -79,3 +79,21 @@
 .user-list-option span {
   vertical-align: middle;
 }
+
+/* rework radio buttons */
+
+.rework-radio-buttons {
+  display: flex;
+  width: 100px;
+  margin-left: 12%;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.rework-task {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  align-items: center;
+  width: 800px;
+}
