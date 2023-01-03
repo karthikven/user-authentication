@@ -2,6 +2,7 @@ import { useState, Fragment } from 'react'
 import { nanoid } from 'nanoid'
 import ReadOnlyRow  from './table-components/ReadOnlyRow'
 import EditableRow  from './table-components/EditableRow'
+import AddNewRow from './table-components/AddNewRow'
 import { useLocalStorage } from "./../../../../hooks/useLocalStorage";
 import './LaborMaterial.css'
 
@@ -25,6 +26,8 @@ const LaborMaterial = () => {
 		material_qty: '',
 		material_units: ''	
 	})
+
+	
 
 
 
@@ -70,6 +73,11 @@ const LaborMaterial = () => {
 		}
 		const newAllocatedMaterial = [...allocatedMaterial, newRecord]
 		setAllocatedMaterial(newAllocatedMaterial)
+		addFormData.material_name=''
+		addFormData.material_brand=''
+		addFormData.material_qty=''
+		addFormData.material_units=''
+
 	}
 
 	const handleEditFormSubmit = (event) => {
@@ -135,7 +143,7 @@ const LaborMaterial = () => {
 	        					<th>Material Brand</th>
 	        					<th>Material Quantity</th>
 	        					<th>Material Units</th>
-	        					<th>Actions</th>
+	        					<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 	        				</tr>
 	        			</thead>
 	        			<tbody>
@@ -143,14 +151,16 @@ const LaborMaterial = () => {
 	        					<Fragment>
 	        						{ 
 	        							editMaterialId === rec.id ? 
-	        							<EditableRow editFormData={editFormData} 
-	        							handleEditFormChange={handleEditFormChange} 
-	        							handleCancelClick={handleCancelClick}/> 
+	        							<EditableRow 
+	        								editFormData={editFormData} 
+	        								handleEditFormChange={handleEditFormChange} 
+	        								handleCancelClick={handleCancelClick}
+	        							/> 
 
 	        							: <ReadOnlyRow 
-	        							materialRecord={rec} 
-	        							handleEditRow={handleEditRow}
-	        							handleDeleteClick={handleDeleteClick}
+	        								materialRecord={rec} 
+	        								handleEditRow={handleEditRow}
+	        								handleDeleteClick={handleDeleteClick}
 	        							/>
 	        						}
 	        						{/*
@@ -158,10 +168,14 @@ const LaborMaterial = () => {
 	        						<ReadOnlyRow materialRecord={rec}/>*/}
 	        					</Fragment>
 	        				))}
+	        				<AddNewRow 
+	        					handleAddFormSubmit={handleAddFormSubmit}
+	        					handleAddFormChange={handleAddFormChange}
+	        					addFormData={addFormData}
+	        				/>
 	        			</tbody>
 	        		</table>
 	        	</form>
-        		
         	</div>
         	{/* <div className="material-add-new-row"> */}
         	{/* 	<form onSubmit={handleAddFormSubmit}> */}

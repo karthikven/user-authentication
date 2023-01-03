@@ -11,6 +11,7 @@
     height: 450px;
     overflow-y: auto;
     vertical-align: middle;
+
 }
 
 .create-card-labor-material-label-input {
@@ -48,6 +49,7 @@
   margin-left: auto;
   margin-right: auto;
 
+
 }
 
 .create-card-labor-material form {
@@ -70,9 +72,12 @@
 .create-card-labor-material table {
 /*  margin-top: 5%;*/
   border-collapse: collapse;
-  width: 100%;
+  width: 700px;
 /*  margin-bottom: 3%;*/
   margin-bottom: 0;
+  margin-left: auto;
+  margin-right: 0;
+
 }
 
 .create-card-labor-material table thead tr th {
@@ -82,10 +87,26 @@
 
 .create-card-labor-material table td,
 .create-card-labor-material table th {
-  border: 1px solid #ddd;
+/*  border: 1px solid #ddd;*/
   padding: 8px;
   align-items: center;
   text-align: center;
+}
+
+.create-card-labor-material table th:last-child,
+.create-card-labor-material table td:last-child {
+/*  width: 40px;*/
+  border: none;
+  background-color: none;
+}
+
+.create-card-labor-material table th:last-child {
+  background-color: #313031;
+}
+
+
+.create-card-labor-material table td {
+  color: #fff;
 }
 
 .create-card-labor-material table tr:nth-child(even) {
@@ -94,6 +115,7 @@
 
 .create-card-labor-material table tr:hover {
 /*  background-color: #ddd;*/
+/*  width: 750px;*/
 }
 
 .create-card-labor-material table th,
@@ -119,20 +141,21 @@
   color: #131313;
   border: 0 none;
   cursor: pointer;
-  padding: 5px 5px;
-  margin: 5px 5px;
-  padding: 5px
+  padding: 3px 3px;
+  margin: 3px 3px;
+  font-size: 12px;
+  
 }
 
-.material-add-new-row form{
+.material-add-new-row form {
   display: inline-block;
 /*  justify-content: space-around;*/
-  margin-top: -60px;
-  margin-left: 0px;
-  width: 800px;
+/*  margin-top: -60px;*/
+  margin-top: -20px;
+  margin-left: 30px;
+  margin-right: auto;
+  width: 750px;
 }
-
-
 
 .material-add-new-row form input {
 /*  margin-top: -10px;*/
@@ -142,10 +165,32 @@
   padding: 5px;
   border-radius: 10px;
   border: solid 1px #fff;
+  font-size: 12px;
   
 }
 
+.material-add-new-row button {
+  width: 100px;
+  height: 50px;
+  font-size: 12px;
+  padding: 0%;
+}
 
 
+.table-actions-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  /*background: white;
+  border: 1px solid #ccc;*/
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: #fff;
+}
 
-
+.create-card-labor-material-table {
+  margin-bottom: 0;
+}

@@ -1,3 +1,15 @@
+.create-card-location-and-design-container {
+  display: block;
+  align-items: center;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+/*  margin-top: 10%;*/
+  height: 450px;
+  overflow-y: auto;
+
+}
+
 .create-card-location-and-design {
   display: grid;
   grid-template-columns: 1fr 1fr;
